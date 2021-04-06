@@ -1,12 +1,18 @@
 import paho.mqtt.client as mqtt
+import time
+
+
+topic = input("\nSubscribed topic: ")
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
-
-    client.subscribe("christine/sample")
+    print(" ")
+    client.subscribe(topic)
 
 def on_message(client, userdata, msg):
-    print(str(msg.payload.decode()))
+    time.sleep(1)
+    print(msg.topic + ": " + str(msg.payload.decode()))
+        
 
 client = mqtt.Client()
 client.on_connect = on_connect
