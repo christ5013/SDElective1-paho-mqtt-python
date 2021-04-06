@@ -17,31 +17,33 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div id="" class="col-sm-12">
+    <div class="col-sm-12">
         <h1>MQTT</h1>
-        <div class="form-group container">
-            <div class="row">
+        <div id="container"  class="form-group container">
+            <div class="row" style="margin-left: 20px; text-align: center;">
                 <h3>PUBLISH</h3>
+                <br>
                 <label >Topic:</label>
                <input id="topic-input" type="text"><br><br>
                <label >Payload: </label>
                <input id="payload-input" type="text">
-            </div>
-            <br>
-            <div class="row">
+               <br><br>
+            <div class="row" style="margin-left: 40px;" >
                 <button id="pub-button" class="btn btn-primary" value="">Publish</button>
             </div> 
-            <div class="row">
-                <h3>PUBLISH</h3>
+            </div>
+            
+            <div class="row" style="margin-left: 10%; text-align: center;">
+                <h3>SUBSCRIBE</h3>
+                <br>
                 <label >Topic:</label>
                <input id="topic-input" type="text"><br><br>
-               <label >Payload: </label>
-               <input id="payload-input" type="text">
+               <br>
+               <div class="row">
+                   <button id="pub-button" class="btn btn-primary" value="">Publish</button>
+               </div>  
             </div>
-            <br>
-            <div class="row">
-                <button id="pub-button" class="btn btn-primary" value="">Publish</button>
-            </div>    
+             
         </div>
     </div>
 </body>
