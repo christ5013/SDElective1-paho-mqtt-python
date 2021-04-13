@@ -17,31 +17,52 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="col-sm-12">
-        <h1>MQTT</h1>
+ 
+   
+  
+    <div class="col-sm-12 mt-5" >
+        <div class="container-fluid bg-2 text-center">
+            <center>
+                <h1>Publish/Subscribe Web Client</h1>
+                
+            </center>
+          </div>
         <div id="container"  class="form-group container">
-            <div class="row" style="margin-left: 20px; text-align: center;">
+            <div class="row" style="margin-left: 20px; text-align: center; margin-top: 25px;">
                 <h3>PUBLISH</h3>
                 <br>
                 <label >Topic:</label>
-               <input id="topic-input" type="text"><br><br>
+               <input id="publishTopic" type="text"><br><br>
                <label >Payload: </label>
-               <input id="payload-input" type="text">
+               <input id="publishPayload" type="text">
                <br><br>
             <div class="row" style="margin-left: 40px;" >
-                <button id="pub-button" class="btn btn-primary" value="">Publish</button>
+                <button id="pub-button" class="btn btn-primary" >Publish</button>
             </div> 
+            <br>
             </div>
             
-            <div class="row" style="margin-left: 10%; text-align: center;">
+            <div class="row" style="margin-left: 10%; text-align: center;margin-top: 25px;">
                 <h3>SUBSCRIBE</h3>
                 <br>
                 <label >Topic:</label>
-               <input id="topic-input" type="text"><br><br>
+               <input id="subscribe-input" type="text"><br><br>
                <br>
                <div class="row">
-                   <button id="pub-button" class="btn btn-primary" value="">Publish</button>
+                   <button id="sub-button" class="btn btn-primary" >Subscribe</button>
                </div>  
+            </div >
+        
+            <div class="row" style="margin-left: 10%; text-align: center; margin-top: 25px;">
+                <center>
+                    <h3>Incoming Message</h3>
+                </center>
+                <table id="messageTable" class ="table">
+                    <tr>
+                        <th>Topic</th>
+                        <th>Payload</th>
+                    </tr>
+                </table>
             </div>
              
         </div>
