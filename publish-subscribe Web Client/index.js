@@ -1,56 +1,86 @@
-console.log("index.js");
 
-// var mqtt = require('mqtt');
-// var client  = mqtt.connect({ host:'test.mosquitto.org', port: 8081})
-// or
-var client  = mqtt.connect('wss://test.mosquitto.org:8081/mqtt')
 
-// var client  = mqtt.connect({ host:'mqtt.eclipse.org/mqtt', port: 443})
-// or
-// var client  = mqtt.connect('wss://mqtt.eclipse.org:443/mqtt')
-  client.on('connect', function () {
-    $('#sub-button').on('click', function(){
-      var publish_topic_input =$('#publishTopic').val();
-      var publishPayload = $('#publishPayload').val();
-      var subscribe_input = $('#subscribe-input').val();
-      if (publish_topic_input == subscribe_input){
-        $('#pub-button').on('click',function(){
-          $('#messageTable').append(`<tr><td>${publish_topic_input}</td><td>${publishPayload}</td></tr>`);
-          client.publish(publish_topic_input, publishPayload)
-          // publish_topic_input =""
-          // publishPayload ="";
-          
-        })
-      }
-    })
-  client.subscribe('messages', function (err) {
-    if (!err) {
-      client.publish('messages', 'hello mqtt')
-    }
-  })
+var client = mqtt.connect('wss://test.mosquitto.org:8081/mqtt');
+
+client.on('connect', function () {
+  console.log("connected");
+  alert("Connected!");
 })
+
+function publishFunction() {
+  var publish_topic_input = $('#publishTopic').val();
+  var publishPayload = $('#publishPayload').val();
+  
+  if (publish_topic_input != "" && publish_topic_input != "") {
+    client.publish(publish_topic_input, publishPayload)
+  } else {
+    alert("Please input topic and Payload");
+  }
+}
+
+function subscribeFunction() {
+  var subscribe_input = $('#subscribe-input').val();
+  if (subscribe_input != "") {
+    client.subscribe(subscribe_input, function (error) {
+      if (error) {
+        console.log("Error!");
+      }
+    });
+  }else{
+    alert("Please input a subscribe topic!");
+  }
+
+}
 
 client.on('message', function (publish_topic_input, publishPayload) {
-  // message is Buffer
-  console.log(publish_topic_input.toString())
-//   client.end()
+  if (publish_topic_input == $('#subscribe-input').val()) {
+    console.log(publish_topic_input);
+    console.log($('#subscribe-input').val());
+    $('#messageTable').append(`<tr><td>${publish_topic_input}</td><td>${publishPayload}</td></tr>`);
+  }
 })
 
 
 
 
 
+//Buang ang broker
+// console.log("index.js");
 
-// pub_button.addEventListener('click', () => {
-//   var table = document.getElementsByClassName('table');
-//   var messageHolder = table.append(`<tr><td>${publish_topic_input}</td><td>${publishPayload}</td></tr>`)
-//   client.publish('messages', messageHolder)
-//   pub_input.value = "";
+// // var client  = mqtt.connect('wss://test.mosquitto.org:8081/mqtt')
+// var client  = mqtt.connect('wss://mqtt.eclipse.org:443/mqtt')
+
+// client.on('connect', function () {
+//     console.log('connected')
+  
 // })
 
-// $('#pub-button').on('click',function(){
-//   var table = document.getElementsByClassName('table');
-//   var messageHolder = table.prepend(`<tr><td>${publish_topic_input}</td><td>${publishPayload}</td></tr>`)
-//   client.publish('messages', messageHolder)
-//   pub_input.value = "";
+// client.on('message', function (pub_topic, message) {
+//   if(pub_topic == document.getElementById('sub-input-topic').value){
+//     document.getElementById('messageTable').innerHTML += `<tr><td>${pub_topic}</td><td>${message}</td></tr>`;  
+//   }
 // })
+
+// function publishFunction(){
+//   let pub_topic_input = $('#publishTopic').val();
+//   let pub_payload_input = $('#publishPayload').val();
+
+//   if(pub_topic_input != "" && pub_payload_input != ""){
+//     client.publish(pub_topic_input,pub_payload_input);
+//   }else{
+//     alert("Input the topic and payload!");
+//   }
+// }
+
+// function subscribeFunction(){
+//   let sub_topic_input = $('#subscribe-input').val();
+//   if(sub_topic_input != ""){
+//     client.subscribe(sub_topic_input, function(error){
+//       if(error){
+//         console.log("Error in subscribing topic!");
+//       }
+//     });
+//   }else{
+//     alert("Input the topic!");
+//   }
+// }
